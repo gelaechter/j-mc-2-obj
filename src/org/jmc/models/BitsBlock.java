@@ -12,6 +12,7 @@ import org.jmc.threading.ThreadChunkDeligate;
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Optional;
 
 /**
  * Most code here is taken or adapted from Bits And Chisels' <a href="https://github.com/CoolMineman/BitsAndChisels/blob/master/src/main/java/io/github/coolmineman/bitsandchisels/BitMeshes.java">original meshing implementation</a>:
@@ -88,23 +89,23 @@ public class BitsBlock extends BlockModel {
                 return true;
             case DOWN:
                 if (y >= 1)
-                    return states[x][y - 1][z].id.equals(NamespaceID.fromString("minecraft:air")) || BlockTypes.get(states[x][y + 1][z]).getOcclusion() != BlockInfo.Occlusion.FULL && states[x][y][z] != states[x][y - 1][z];
+                    return states[x][y - 1][z].id.equals(NamespaceID.fromString("minecraft:air")) || BlockTypes.get(states[x][y - 1][z]).getOcclusion() != BlockInfo.Occlusion.FULL && states[x][y][z] != states[x][y - 1][z];
                 return true;
             case SOUTH:
                 if (z <= 14)
-                    return states[x][y][z + 1].id.equals(NamespaceID.fromString("minecraft:air")) || BlockTypes.get(states[x][y + 1][z]).getOcclusion() != BlockInfo.Occlusion.FULL && states[x][y][z] != states[x][y][z + 1];
+                    return states[x][y][z + 1].id.equals(NamespaceID.fromString("minecraft:air")) || BlockTypes.get(states[x][y][z + 1]).getOcclusion() != BlockInfo.Occlusion.FULL && states[x][y][z] != states[x][y][z + 1];
                 return true;
             case NORTH:
                 if (z >= 1)
-                    return states[x][y][z - 1].id.equals(NamespaceID.fromString("minecraft:air")) || BlockTypes.get(states[x][y + 1][z]).getOcclusion() != BlockInfo.Occlusion.FULL && states[x][y][z] != states[x][y][z - 1];
+                    return states[x][y][z - 1].id.equals(NamespaceID.fromString("minecraft:air")) || BlockTypes.get(states[x][y][z - 1]).getOcclusion() != BlockInfo.Occlusion.FULL && states[x][y][z] != states[x][y][z - 1];
                 return true;
             case EAST:
                 if (x <= 14)
-                    return states[x + 1][y][z].id.equals(NamespaceID.fromString("minecraft:air")) || BlockTypes.get(states[x][y + 1][z]).getOcclusion() != BlockInfo.Occlusion.FULL && states[x][y][z] != states[x + 1][y][z];
+                    return states[x + 1][y][z].id.equals(NamespaceID.fromString("minecraft:air")) || BlockTypes.get(states[x + 1][y][z]).getOcclusion() != BlockInfo.Occlusion.FULL && states[x][y][z] != states[x + 1][y][z];
                 return true;
             case WEST:
                 if (x >= 1)
-                    return states[x - 1][y][z].id.equals(NamespaceID.fromString("minecraft:air")) || BlockTypes.get(states[x][y + 1][z]).getOcclusion() != BlockInfo.Occlusion.FULL && states[x][y][z] != states[x - 1][y][z];
+                    return states[x - 1][y][z].id.equals(NamespaceID.fromString("minecraft:air")) || BlockTypes.get(states[x - 1][y][z]).getOcclusion() != BlockInfo.Occlusion.FULL && states[x][y][z] != states[x - 1][y][z];
                 return true;
         }
         return true;
